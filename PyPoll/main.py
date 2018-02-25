@@ -40,11 +40,27 @@ def poll_analysis(csvpath=''):
             print("{}: {}% ({})".format(key, candidate_dict[key][1], candidate_dict[key][0]))
         print("------------------------------")
         print("Winner: {}".format(winner))
-        print("------------------------------")
+        print("---------------END OF REPORT---------------")
+
+    get_report_filepath = input("Please enter the file path for saving Financial Analysis Report: ")
+    try:
+        report = open(os.path.join(get_report_filepath, "Election_Results_PyPoll.txt"), "w")
+        report.write("Election Results\n")
+        report.write("---------------------------\n")
+        report.write("Total Votes: {}\n".format(total_votes))
+        report.write("------------------------------\n")
+        for key in candidate_dict.keys():
+            report.write("{}: {}% ({})\n".format(key, candidate_dict[key][1], candidate_dict[key][0]))
+        report.write("------------------------------\n")
+        report.write("Winner: {}\n".format(winner))
+        report.write("------------------------------\n")
+        print("-------- REPORT SUCCESSFULLY SAVED IN TEXT FILE @ {} ----------".format(os.path.join(get_report_filepath, "Election_Results_PyPoll.txt")))
+    except IOError:
+        print('An error occured trying to write the file.')
         
 def get_results():
     csv_filepath = input("Please enter the file path with Election data to view results: ")
-    poll_analysis(csv_filepath)
+    return poll_analysis(csv_filepath)
 
 get_results()
             

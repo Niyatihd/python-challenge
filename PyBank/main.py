@@ -62,10 +62,26 @@ def financial_records_analysis(csvpath=''):
 
     print("Greatest Revenue Increase: %s ($%d)" % (greatest_revenue_inc_month, greatest_revenue_inc))
     print("Greatest Revenue Decrease: %s ($%d)" % (greatest_revenue_dec_month, greatest_revenue_dec))
-
+    print("---------------END OF REPORT---------------")
+    get_report_filepath = input("Please enter the file path for saving Financial Analysis Report: ")
+    try:
+        report = open(os.path.join(get_report_filepath, "Financial_Analysis_Report_PyBank.txt"), "w")
+        report.write("Financial Analysis\n")
+        report.write("---------------------------\n")
+        report.write("Total Months: %d\n" % total_months)
+        report.write("Total Revenue: $%d\n" % total_revenue)
+        report.write("Average Revenue Change: $%d\n" % average_revenue_change)
+        report.write("Greatest Revenue Increase: %s ($%d)\n" % (greatest_revenue_inc_month, greatest_revenue_inc))
+        report.write("Greatest Revenue Decrease: %s ($%d)\n" % (greatest_revenue_dec_month, greatest_revenue_dec))
+        print("-------- REPORT SUCCESSFULLY SAVED IN TEXT FILE @ {} ----------".format(os.path.join(get_report_filepath, "Financial_Analysis_Report_PyBank.txt")))
+    except IOError:
+        print('An error occured trying to write the file.') 
+        
+    
 def get_filepath_and_run_analysis():
-    filepath = input("Please enter the file path for Financial Analysis: ")
+    filepath = input("Please enter the file path with Data for Financial Analysis: ")
     return financial_records_analysis(filepath)
+    
 
 get_filepath_and_run_analysis()
 
