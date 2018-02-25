@@ -2,7 +2,6 @@
 import os
 import csv
 import re
-csv_path1 = "/Users/niyatidesai/Google Drive/Documents/UC Berkeley Ext._Data Analytics/Week_3_Python/Homework/Instructions/PyBank/raw_data/budget_data_1.csv"
 
 def financial_records_analysis(csvpath=''):
     total_months, total_revenue = 0, 0
